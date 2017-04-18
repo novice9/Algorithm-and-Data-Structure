@@ -1,3 +1,7 @@
+// Implementation of a LRU(lease recent used) cache
+// operation
+//     1. insert: bring new element into cache (if cache is full, remove the least recent one) - O(1)
+//     2. query: check the value of a key - O(1)
 
 class DoubleListNode {
 public:
