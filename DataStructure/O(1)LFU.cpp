@@ -1,4 +1,7 @@
-// all operations(lookup, insert, erase) are O(1)
+// Implementation of a LFU(lease frequent used) cache
+// operation
+//     1. insert: bring new element into cache (if cache is full, remove the least frequent one) - O(1)
+//     2. query: check the value of a key - O(1)
 
 class DoubleListNode {
 public:
