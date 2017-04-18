@@ -1,3 +1,8 @@
+// store a matrix into a 2D segment tree
+// operation
+//     1. update: change the value of a slot in the matrix - O(logn)
+//     2. query: check the sum of any sub-matrix - O(logn)
+
 class SegmentTreeNode2D {
 public:
     int left, right, top, bottom;
