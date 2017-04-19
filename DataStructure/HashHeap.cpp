@@ -1,5 +1,8 @@
-// This is a implementation of hashed heap
-
+// Code of a hashed Maxheap (can be converted into a MinHeap easily)
+// operations
+//     1. insert: add a new key-value pair into the heap - Olog(n)
+//     2. remove: remove a existing key-value pair from the heap - Olog(n)
+//     3. getMax: return the key-value pair with the max value - Olog(n)
 
 class HeapNode {
 public:
