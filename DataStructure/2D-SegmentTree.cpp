@@ -1,4 +1,4 @@
-// store a matrix into a 2D segment tree
+// code of a 2D segment tree (initialized with a matrix)
 // operation
 //     1. update: change the value of a slot in the matrix - O(logn)
 //     2. query: check the sum of any sub-matrix - O(logn)
