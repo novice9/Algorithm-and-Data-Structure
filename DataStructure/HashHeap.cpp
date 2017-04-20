@@ -69,7 +69,7 @@ public:
 private:
     vector<HeapNode> nodes;
     map<int, int> lookup;
-	int size;
+    int size;
     void bubup(int pos) {
         int parent = (pos + 1) / 2 - 1;
         if(parent < 0 || pos >= size) {
