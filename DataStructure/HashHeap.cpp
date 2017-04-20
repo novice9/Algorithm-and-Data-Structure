@@ -3,6 +3,7 @@
 //     1. insert: add a new key-value pair into the heap - Olog(n)
 //     2. remove: remove a existing key-value pair from the heap - Olog(n)
 //     3. getMax: return the key-value pair with the max value - Olog(n)
+//
 
 class HeapNode {
 public:
@@ -42,11 +43,25 @@ public:
         popdn(index);
     }
 
-    int getMax() {
+    HeapNode getMax() {
         if (tail == 0) {
-            return 0;
+            return HeapNode(-1, INT_MIN);
         }
-        return nodeList[0].val;
+        return nodeList[0];
+    }
+    
+    void popMax() {
+        if (tail == 0) {
+            return;
+        }
+        remove(nodeList[0].key);
+    }
+    
+    int getKey(int k) {
+        if (lookup.count(k) == 0) {
+            return INT_MIN;
+        }
+        return lookup[k];
     }
 
 private:
