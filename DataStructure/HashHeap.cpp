@@ -14,14 +14,14 @@ public:
     }
 
     bool operator<(const HeapNode &hn) const {
-    	return val < hn.val;
+        return val < hn.val;
     }
 };
 
 class HashHeap {
 public:
     HashHeap()
-	: size(0) {
+    : size(0) {
     }
 
     void insert(int k, int v) {
@@ -63,7 +63,7 @@ public:
         if (lookup.count(k) == 0) {
             return INT_MIN;
         }
-        return lookup[k];
+        return nodes[lookup[k]].val;
     }
 
 private:
