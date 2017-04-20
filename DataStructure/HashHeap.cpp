@@ -12,9 +12,10 @@ public:
     HeapNode(int k, int v)
     : key(k), val(v) {
     }
+
     bool operator<(const HeapNode &hn) const {
     	return val < hn.val;
-	}
+    }
 };
 
 class HashHeap {
@@ -22,6 +23,7 @@ public:
     HashHeap()
 	: size(0) {
     }
+
     void insert(int k, int v) {
         nodes.push_back(HeapNode(k, v));
         ++size;
