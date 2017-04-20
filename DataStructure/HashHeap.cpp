@@ -1,33 +1,32 @@
 // Code of a hashed Maxheap (can be converted into a MinHeap easily)
 // operations
 //     1. insert: add a new key-value pair into the heap - Olog(n)
-//     2. remove: remove a existing key-value pair from the heap - Olog(n)
-//     3. getMax: return the key-value pair with the max value - Olog(n)
-//
+//     2. remove: remove a existing key-value pair from the heap - O(logn)
+//     3. getMax: return the key-value pair with the max value - O(logn)
+//     4. popMax: pop out the key-value pair with the max value - O(logn)
+//     5. getKey: return the value of the provided key if existing - O(1)
 
 class HeapNode {
 public:
     int key, val;
-    HeapNode(int k = -1, int v = 0)
+    HeapNode(int k, int v)
     : key(k), val(v) {
     }
-    
     bool operator<(const HeapNode &hn) const {
-        return val < hn.val;
-    }
+		return val < hn.val;
+	}
 };
 
 class HashHeap {
 public:
-    HashHeap(int s)
-    : size(s), tail(0) {
-        nodeList = new HeapNode[size]();
+    HashHeap()
+	: size(0) {
     }
     void insert(int k, int v) {
-        nodeList[tail] = HeapNode(k, v);
-        update(tail);
-        ++tail;
-        bubup(tail - 1);
+        nodes.push_back(HeapNode(k, v));
+        update(size);
+        ++size;
+        bubup(size - 1);
     }
 
     void remove(int k) {
@@ -36,25 +35,26 @@ public:
         }
         int index = lookup[k];
         lookup.erase(k);
-        --tail;
-        swap(nodeList[tail], nodeList[index]);
+        --size;
+        swap(nodes[size], nodes[index]);
         update(index);
+		nodes.pop_back();
         bubup(index);
         popdn(index);
     }
 
     HeapNode getMax() {
-        if (tail == 0) {
-            return HeapNode(-1, INT_MIN);
+        if (size == 0) {
+            return HeapNode(0, 0);
         }
-        return nodeList[0];
+        return nodes[0];
     }
     
     void popMax() {
-        if (tail == 0) {
+        if (size == 0) {
             return;
         }
-        remove(nodeList[0].key);
+        remove(nodes[0].key);
     }
     
     int getKey(int k) {
@@ -65,16 +65,16 @@ public:
     }
 
 private:
-    HeapNode *nodeList;
+    vector<HeapNode> nodes;
     map<int, int> lookup;
-    int size, tail;
+	int size;
     void bubup(int pos) {
         int parent = (pos + 1) / 2 - 1;
         if(parent < 0) {
             return;
         }
-        if (nodeList[parent] < nodeList[pos]) {
-            swap(nodeList[parent], nodeList[pos]);
+        if (nodes[parent] < nodes[pos]) {
+            swap(nodes[parent], nodes[pos]);
             update(parent);
             update(pos);
             bubup(parent);
@@ -83,22 +83,22 @@ private:
 
     void popdn(int pos) {
         int child1 = (pos + 1) * 2 -1;
-        if (child1 >= tail) {
+        if (child1 >= size) {
             return;
         }
         int maxChild;
-        if (child1 == tail - 1) {
+        if (child1 == size - 1) {
             maxChild = child1;
         } else {
             int child2 = child1 + 1;
-            if (nodeList[child1] < nodeList[child2]) {
+            if (nodes[child1] < nodes[child2]) {
                 maxChild = child2;
             } else {
                 maxChild = child1;
             }
         }
-        if (nodeList[pos] < nodeList[maxChild]) {
-            swap(nodeList[pos], nodeList[maxChild]);
+        if (nodes[pos] < nodes[maxChild]) {
+            swap(nodes[pos], nodes[maxChild]);
             update(pos);
             update(maxChild);
             popdn(maxChild);
@@ -106,11 +106,7 @@ private:
     }
 
     void update(int pos) {
-        int key = nodeList[pos].key;
-        if (!lookup.count(key)) {
-            lookup.insert(make_pair(key, -1));
-        }
+        int key = nodes[pos].key;
         lookup[key] = pos;
     }
 };
-
