@@ -5,6 +5,7 @@
 vector<int>  dijstraShortestPath(vector<unordered_map<int, int>> &myGraph, int source) {
     int size = myGraph.size();
 	vector<int> dist(size, INT_MAX);
+    // initiate the minHeap with source node
 	HashHeap minHeap;
 	minHeap.insert(source, 0);
 	for (int i = 0; i < size; ++i) {
@@ -22,6 +23,7 @@ vector<int>  dijstraShortestPath(vector<unordered_map<int, int>> &myGraph, int s
 			if(minHeap.getKey(key) <= val) {
 				continue;
 			}
+            // update minHeap to include the shorter path
 			minHeap.remove(key);
 			minHeap.insert(key, val);
 		}
