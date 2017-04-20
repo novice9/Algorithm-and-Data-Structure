@@ -2,9 +2,9 @@
 // operations
 //     1. insert: add a new key-value pair into the heap - Olog(n)
 //     2. remove: remove a existing key-value pair from the heap - O(logn)
-//     3. getMax: return the key-value pair with the max value - O(logn)
+//     3. getMax: return the key-value pair with the max value - O(1)
 //     4. popMax: pop out the key-value pair with the max value - O(logn)
-//     5. getKey: return the value of the provided key if existing - O(1)
+//     5. getKey: return the value of a provided key if existing - O(1)
 
 class HeapNode {
 public:
