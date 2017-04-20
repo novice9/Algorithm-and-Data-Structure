@@ -13,7 +13,7 @@ public:
     : key(k), val(v) {
     }
     bool operator<(const HeapNode &hn) const {
-		return val < hn.val;
+    	return val < hn.val;
 	}
 };
 
@@ -24,8 +24,8 @@ public:
     }
     void insert(int k, int v) {
         nodes.push_back(HeapNode(k, v));
-        update(size);
         ++size;
+        update(size - 1);
         bubup(size - 1);
     }
 
@@ -35,10 +35,10 @@ public:
         }
         int index = lookup[k];
         lookup.erase(k);
+        swap(nodes[size - 1], nodes[index]);
+	    nodes.pop_back();
         --size;
-        swap(nodes[size], nodes[index]);
-        update(index);
-		nodes.pop_back();
+	    update(index);
         bubup(index);
         popdn(index);
     }
@@ -70,7 +70,7 @@ private:
 	int size;
     void bubup(int pos) {
         int parent = (pos + 1) / 2 - 1;
-        if(parent < 0) {
+        if(parent < 0 || pos >= size) {
             return;
         }
         if (nodes[parent] < nodes[pos]) {
@@ -83,7 +83,7 @@ private:
 
     void popdn(int pos) {
         int child1 = (pos + 1) * 2 -1;
-        if (child1 >= size) {
+        if (pos < 0 || child1 >= size) {
             return;
         }
         int maxChild;
@@ -106,6 +106,9 @@ private:
     }
 
     void update(int pos) {
+	    if (size <= pos) {
+            return;
+        }
         int key = nodes[pos].key;
         lookup[key] = pos;
     }
