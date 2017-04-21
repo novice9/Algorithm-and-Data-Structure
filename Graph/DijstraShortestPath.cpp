@@ -2,8 +2,8 @@
 // Graph is represented as adjacent list, Min HashHeap is used to improve timing complexity
 // Code of HashHeap is in the data structure directory
 
-vector<int> dijstraShortestPath(vector<unordered_map<int, int>> &myGraph, int source) {
-    int size = myGraph.size();
+vector<int> dijstraShortestPath(vector<unordered_map<int, int>> &graph, int source) {
+    int size = graph.size();
     vector<int> dist(size, INT_MAX);
     // initiate the minHeap with source node
     HashHeap minHeap;
@@ -12,7 +12,7 @@ vector<int> dijstraShortestPath(vector<unordered_map<int, int>> &myGraph, int so
         HeapNode cur = minHeap.getMin();
         minHeap.popMin();
         dist[cur.key] = cur.val;
-        for (pair<int, int> e : myGraph[cur.key]) {
+        for (pair<int, int> e : graph[cur.key]) {
             int key = e.first;
             // shortest path to key aleready found
             if (dist[key] != INT_MAX) {
