@@ -40,4 +40,7 @@ public:
             nodes[l2].leader = l1;
         }
     }
+    
+private:
+    vector<Node> nodes;
 };
