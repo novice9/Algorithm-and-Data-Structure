@@ -5,7 +5,7 @@ vector<int> strStr(string haystack, string needle) {
 	int sizeN = needle.size();
 	if (sizeN == 0) {
         return 0;
-    }
+	}
 	vector<int> lps = calLPS(needle);
 	int ptr1, ptr2;
 	ptr1 = ptr2 = 0;
