@@ -1,12 +1,12 @@
 // The code of morries algorithm to traverse binary search without extra space
 
 vector<int> inorderTraversal(TreeNode* root) {
-	vector<int> trav;
-	if (root == NULL) {
-		return trav;
-	}
-	TreeNode* cur = root;
-	TreeNode* pre = NULL;
+    vector<int> trav;
+    if (root == NULL) {
+        return trav;
+    }
+    TreeNode* cur = root;
+    TreeNode* pre = NULL;
 	while (cur != NULL) {
 		if (cur->left != NULL) {
 			pre = cur->left;
