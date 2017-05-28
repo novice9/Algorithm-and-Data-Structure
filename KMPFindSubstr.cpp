@@ -7,7 +7,7 @@ vector<int> strStr(string haystack, string needle) {
         return 0;
 	}
 	vector<int> lps = calLPS(needle);
-	int ptr1, ptr2;
+    int ptr1, ptr2;
 	ptr1 = ptr2 = 0;
 	vector<int> indexs;
 	while (ptr1 < sizeH) {
