@@ -43,19 +43,19 @@ vector<int> inorderTraversal(TreeNode* root) {
 }
 
 TreeNode* morrisNext(TreeNode* cur) {
-    if (root->left == NULL) {
+    if (cur->left == NULL) {
         return root;
     } else {
-        TreeNode *pred = root->left;
+        TreeNode *pred = cur->left;
         while (pred != NULL && pred->right != NULL && pred->right != root) {
                 pred = pred->right;
         }
         if (pred->right == NULL) {
             pred->right = root;
-            return morrisNext(root->left);
+            return morrisNext(cur->left);
         } else {
             pred->right = NULL;
-            return root;
+            return cur;
         }
     }
 }
