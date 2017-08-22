@@ -5,6 +5,7 @@ vector<double> streamingMedians(vector<int> &nums) {
     priority_queue<int, vector<int>, less<int>> lower;
     vector<double> medians;
     for (int num : nums) {
+        // update heaps
         if (upper.empty() && lower.empty()) {
             lower.push(num);
         } else if (upper.empty()) {
@@ -22,11 +23,15 @@ vector<double> streamingMedians(vector<int> &nums) {
             upper.push(threeNum[2]);
             if (lower.size() > upper.size()) {
                 upper.push(threeNum[1]);
-                medians.push_back((threeNum[0] + threeNum[1]) / 2.0);
             } else {
                 lower.push(threeNum[1]);
-                medians.push_back(threeNum[1]);
             }
+        }
+        // find medians
+        if (lower.size() == upper.size()) {
+            medians.push_back((lower.top() + upper.top()) / 2.0);
+        } else {
+            medians.push_back(lower.top());
         }
     }
     return medians;
