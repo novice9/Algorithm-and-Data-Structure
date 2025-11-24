@@ -1,4 +1,24 @@
+#ifndef INDEX_OF_PERMUTATION_CPP
+#define INDEX_OF_PERMUTATION_CPP
+
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+using namespace std;
+
 // Find the index of integer array permutation in lexigraphic order, integer array may contain duplicate
+
+long long noComb(unordered_map<int, int> &cnts, long long wei) {
+    for (pair<int, int> cnt : cnts) {
+        if (cnt.second < 2) {
+            continue;
+        }
+        for (int i = 1; i <= cnt.second; ++i) {
+            wei /= i;
+        }
+    }
+    return wei;
+}
 
 long long permutationIndexII(vector<int>& A) {
 	// Write your code here
@@ -27,14 +47,4 @@ long long permutationIndexII(vector<int>& A) {
     return index;
 }
 
-long long noComb(unordered_map<int, int> &cnts, long long wei) {
-    for (pair<int, int> cnt : cnts) {
-        if (cnt.second < 2) {
-            continue;
-        }
-        for (int i = 1; i <= cnt.second; ++i) {
-            wei /= i;
-        }
-    }
-    return wei;
-}
+#endif
